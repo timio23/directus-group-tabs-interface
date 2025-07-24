@@ -15,6 +15,7 @@ const props = withDefaults(
 		primaryKey: number | string;
 		loading?: boolean;
 		validationErrors?: ValidationError[];
+		badge?: string;
 		group: string;
 		multiple?: boolean;
 		direction?: string;
@@ -25,6 +26,7 @@ const props = withDefaults(
 	}
 );
 
+defineEmits(['apply']);
 const { fieldsInSection } = useGroupSection(toRefs(props));
 </script>
 
@@ -40,6 +42,7 @@ const { fieldsInSection } = useGroupSection(toRefs(props));
 			:loading="loading"
 			:batch-mode="batchMode"
 			:disabled="disabled"
+			:badge="badge"
 			:direction="direction"
 			:show-no-visible-fields="false"
 			:show-validation-errors="false"

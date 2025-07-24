@@ -87,6 +87,7 @@ function useComputedGroup() {
 		:fields="fields"
 		:values="groupValues"
 		:validation-errors="validationErrors!"
+		:batch-mode="batchMode"
 		class="group-tabs"
 		:class="fillWidth && 'fill'"
 	>
@@ -105,7 +106,7 @@ function useComputedGroup() {
 				:validation-errors="validationErrors"
 				:badge="badge"
 				:raw-editor-enabled="rawEditorEnabled"
-				:group="field.meta.field"
+				:group="field.meta?.field ?? field.field"
 				:direction="direction"
 				@apply="$emit('apply', $event)"
 			/>
@@ -113,10 +114,8 @@ function useComputedGroup() {
 	</tab-group>
 </template>
 
-<style scoped lang="scss">
-.group-tabs {
-	.tab-panel {
-		margin-top: var(--theme--form--row-gap);
-	}
+<style scoped lang="css">
+.group-tabs .tab-panel {
+	margin-top: var(--theme--form--row-gap);
 }
 </style>

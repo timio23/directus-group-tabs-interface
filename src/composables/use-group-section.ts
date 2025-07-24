@@ -7,13 +7,14 @@ interface UseGroupSectionOptions {
 	fields: Ref<Field[]>;
 	values: Ref<Record<string, unknown>>;
 	validationErrors: Ref<ValidationError[]>;
+	batchMode: Ref<boolean>;
 }
 
-export function useGroupSection({ field, fields: groupFields, values, validationErrors }: UseGroupSectionOptions) {
+export function useGroupSection({ field, fields: groupFields, values, validationErrors, batchMode }: UseGroupSectionOptions) {
 	const { t } = useI18n();
 
 	const fieldsInSection = computed(() => {
-		const fields: Field[] = [Object.assign({}, unref(field), { hideLabel: true })];
+		const fields: Field[] = [Object.assign({}, unref(field), { hideLabel: batchMode ? false : true })];
 
 		if (unref(field).meta?.special?.includes('group')) {
 			fields.push(...getFieldsForGroup(unref(field).meta?.field, [], unref(groupFields)));
